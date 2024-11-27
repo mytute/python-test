@@ -32,7 +32,7 @@ for that install "IDLE3" for fedora.
 in the "IDLE3" go to "File"> "New File" to create file that insert multiple lines of python code.  
 
 4.1 in the new file, type the following Python code:
-```
+```python
 print('Hello World')
 ```
 4.2 Save the File  
