@@ -1,53 +1,140 @@
-# Integers and Floats - Working with Numeric Data   
+# Lists, Tuples, and Sets  
 
-1. define interger and float numbers and print the it's types.  
-```python 
-num1 = 3 
-num2 = 3.14 
-print(type(num1)) # <class 'int'> 
-print(type(num2)) # <class 'float'> 
+### Lists  
+
+list have many methods to compaire to tuples and sets  
+```python
+courses = ['History', 'Math', 'Physics', 'CompSci']
+print(courses)
+
+# check length of list
+print(len(courses)) # 4
+
+# access values individually (index start at 0)
+print((courses[1])) # 'Math'
+print((courses[-1])) # 'CompSci' last item
+
+# access rage of values  
+print((courses[0:2])) # ['History', 'Math']
+print((courses[:2])) # ['History', 'Math'] from start to 2nd item  
+print((courses[2:])) # ['Physics', 'CompSci'] from 2nd to end item
+
+# ** list methods for modify lists **
+
+# add item to end of list
+courses.append('Art')
+print(courses) # ['History', 'Math', 'Physics', 'CompSci', 'Art']
+
+# add item to specific location of list
+courses.insert(0,'Art') # add to index 0
+print(courses) # ['Art', 'History', 'Math', 'Physics', 'CompSci', 'Art']
+
+# add item with extend method (work like spread operators to concad list)
+courses_1 = ['History', 'Math']
+courses_2 = ['Physics']
+courses_1.extend(courses_2) # add to index 0
+print(courses_1) # ['History', 'Math', 'Physics']
+
+# remove item from list
+courses.remove('Math')
+print(courses) # ['Art', 'History', 'Physics', 'CompSci', 'Art']
+
+# remove list item from list
+popped = courses.pop() # return a value that removed
+print(courses) # ['Art', 'History', 'Physics', 'CompSci']
+
+# change order
+courses.reverse()
+print(courses) # ['CompSci', 'Physics', 'History', 'Art']
+courses.sort() # alphabetical order
+print(courses) # ['Art', 'CompSci', 'History', 'Physics']
+
+nums = [1,5,2,4,3]
+nums.sort() # sorting ascending order
+print(nums)
+nums.sort(reverse=True) # sorting descending order
+print(nums)
+sorted = sorted(nums) # sort without altering the original list
+
+# min max and sum
+print(min(nums)) # 1
+print(max(nums)) # 5
+print(sum(nums)) # 15
+
+# find values in the list
+courses = ['History', 'Math', 'Physics', 'CompSci']
+print(courses.index('Math')) # return index of the list value. 
+# print(courses.index('Art')) # if not in the list show error
+print('Art' in courses) # check whether value included or not
+
+# loops with list
+courses = ['History', 'Math', 'Physics', 'CompSci']
+
+for course in courses:
+    print('loop ' + course)
+    
+# loop with index
+for index, course in enumerate(courses):
+    print(index, course)
+
+# convert list in to string
+courses = ['History', 'Math', 'Physics', 'CompSci']
+course_str = ', '.join(courses)
+print(course_str) # History, Math, Physics, CompSci
+
+# convert seperated string in to list
+seperated_str = 'History, Math, Physics, CompSci'
+new_list = seperated_str.split(',')
+print(new_list) # ['History', ' Math', ' Physics', ' CompSci']
 ```
 
-2. show basic operators  
+### Tuples  
+we can't modify tuple 
+
 ```python 
-# Arithmetic Operators:
-print(3+2)   # 5   Addition
-print(3-2)   # 1   Subtraction
-print(3*2)   # 6   Multiplication
-print(3/2)   # 1.5 Division
-print(3//2)  # 1   Floor Division
-print(3**3)  # 27  Exponent
-print(3 % 2) # 1   Modulus
+# diff list and tuple 
+list_1 = ['History', 'Math', 'Physics', 'CompSci']
+list_2 = list_1
+list_1[0] = 'Art' # this change 'list_2' value too.
+print(list_2) # ['Art', 'Math', 'Physics', 'CompSci']
+
+tuple_1 = ('History', 'Math', 'Physics', 'CompSci')
+tuple_2 = tuple_1
+# tuple_1[0] = 'Art' # show error !!!! because of Immutability 
+print(tuple_1)
+new_tuple = ('Art',)
+tuple_1 = tuple_1 + new_tuple # not changing tuple_2
+print(tuple_1)
+print(tuple_2)
 ```
 
-3. show incrementing variable values  
+### sets  
+
+sets are values unordered and no duplicates.  
+
 ```python 
-number = 1 
-number = number +1 
-print(number) # 2
-# with shorthand way  
-number += 2 
-print(number) # 4
-```
+courses = {'History', 'Math', 'Physics', 'CompSci'}
+print(courses) # {'Math', 'CompSci', 'Physics', 'History'} order can change each execution. 
 
-4. show exmaple of 'abs' and 'round' functions     
-```python 
-# remove negative from the number  
-print(abs(-3)) # 3 
+courses = {'History', 'Math', 'Physics', 'CompSci',  'Math'}
+print(courses) # {'Math', 'History', 'CompSci', 'Physics'}
 
-# round the number to nearest integer value  
-print(round(3.75)) # 4
+# set are optimize for finding valaues
+print('Math' in courses)
 
-# round by digits argument  
-print(round(3.75, 1)) # 3.8 round for first digit  
-```
+# set with another set
+set_1 = {'History', 'Math', 'Physics', 'CompSci'}
+set_2 = {'Art', 'Math', 'CompSci'}
 
-4. comparisons  
-```python 
-print(3 == 2) # False Equal
-print(3 != 2) # True  Not Equal
-print(3 > 2)  # True  Greater Than
-print(3 < 2)  # False Less Than
-print(3 >= 2) # True  Greater or Equal
-print(3 <= 2) # Flase Less or Equal
+print(set_1.intersection(set_2)) # get common values of set_1 and set_2
+print(set_1.difference(set_2))   # get non common values of set_1 and set_2
+print(set_1.union(set_2))        # get all values of set_1 and set_2 without duplication
+
+# create empty List Tuple and Set
+empty_list = []
+empty_list = list()
+empty_tuple = ()
+empty_tuple = tuple()
+# empty_set = {} # error
+empty_set = set()
 ```
