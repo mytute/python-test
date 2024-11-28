@@ -1,47 +1,94 @@
-# Install and Setup   
+# Wroking with Textual Data.  
 
-1. to check is python already installed for your operating system in the terminal.  
-```bash 
-$ python --version
+textual data in python are represented with "strings"  
+Snake case is commonly used to create descriptive variable and method names in Python.  
+
+1. show how to define string variable and print it.    
+```python 
+message = 'Hello World' 
+print(message)
 ```
 
-2. If your computer has both Python 2 and Python 3 installed, the command python typically runs Python 2 by default. To make python point to Python 3 instead of using python3, you can set an alias in your shell configuration file.  
+for string difference between the single quotes and double quotes it really just depends on what text you have in your string.   
+
+2. if your string have single quote then show how to handle it without getting error.  
+```python 
+message1 = 'Bobby\'s World' # using escape carector.  
+message2 = "Bobby's World" # using double quotes. 
 ```
-$ nvim ~/.bash_profile
+
+3. if your string have double quote then show how to handle it without getting error.  
+```python 
+message1 = "Bobby \"A\" World" # using escape carector.  
+message2 = 'Bobby "A" World' # using single quotes. 
 ```
-> /.bash_profile  
-```bash 
-alias python="python3"
+
+4. show how to define multi-line string.  
+```python 
+message = """Bobby's World was a good 
+cartoon in the 1990s"""
 ```
 
-3. to open interactive prompt in python.   
-```bash 
-$ python  
-
->>> print('Hello World')
-Hello World
->>> x = 10
->>> print(x)
-10
->>> exit()
+5. show how to find how many characters are in the string.  
+```python 
+message = 'Hello World' 
+print(len(message)) # 11
 ```
-and above allow write one line of python at a time. and this good only for testing python commands.  
 
-4. we want to have a python file where we can write multiple lines and run an entire scripts.   
-for that install "IDLE3" for fedora.  
-in the "IDLE3" go to "File"> "New File" to create file that insert multiple lines of python code.  
-
-4.1 in the new file, type the following Python code:
-```python
-print('Hello World')
+6. show how to access strings characters individually.  
+```python 
+message = 'Hello World' 
+print(message[0]) # H 
+print(message[10]) # d 
+print(message[11]) # showing index error 
+# showing rage of characters [includ, exclude] 
+print(message[0:4]) # Hell 
+# by default start from and end to.  
+print(message[:4]) # Hell 
+print(message[6:]) # World 
 ```
-4.2 Save the File  
-Save the file by going to File > Save As.  
-Name the file intro.py and choose a directory to save it. Make sure to add the .py extension.  
 
-4.3 Run the Script  
-Press F5 (or go to Run > Run Module) to execute the script.  
-The output (Hello, World!) will appear in the IDLE3 shell.  
+7. show string method with strings.     
+```python 
+message = 'Hello World' 
 
-and save as "intro.py" and press the "F5"(Run Module) to run the file.   
+print(message.lower()) #  
+print(message.upper()) # 
+
+# how many 'Hello' matches are in 'message' string.  
+print(message.count('Hello')) # 1
+print(message.count('l')) # 3 
+
+# find located starting index of the string. 
+print(message.find("World") # 3 
+print(message.find("Universe")) # -1 (not found) 
+
+# replace characters not effected to original string.   
+print(message.replace('World', 'Universe')) # Hello Universe  
+print(message) # Hello World
+message = message.replace('World', 'Universe')
+print(message) # Hello Universe
+```
+
+8. show string concadination.   
+```python 
+greeting = 'Hello' 
+name = 'Michael' 
+# with plus sign operator  
+message = greeting + ', ' + name;
+print(message) # Hello, Michael  
+# with fomatted way   
+message = '{}, {}'.format(greeting, name) # Hello, Michael
+# with fstring way  
+message = f'{greeting}, {name}' # Hello, Michael
+```
+
+9.   
+
+```python 
+message = 'Hello World'
+print(dir(message)) # show all of the attributes and method that can access.  
+print(help(str)) # show more details of string (str) class
+```
+
 
