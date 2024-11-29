@@ -1,49 +1,109 @@
-# Dictionaries - Working with Key-Value Pairs  
+# Conditionals and Boolean - If, Else, and Elif Statements 
+
+Note: python does not have switch statements.   
 
 ```python 
-student = { 1:'index', 'name': 'Jhone', 'age': 25, 'courses':['Math', 'CompSci']}
-print(student)
-print(student['name']) # Jhone access by key(string)
-print(student['courses']) # ['Math', 'CompSci'] access by key
-print(student[1]) # 'index' access by key(number)
+# show hardcoded if condition with 'True' and 'False'
+if True:
+    print('Conditional was True')
 
-# use get method to not to return error when key is not existed
-print(student.get('name')) # Jhone
-print(student.get('return none')) # None
-# set default value if value not exited
-print(student.get('return none', 'not found')) # not found
+language = 'Python'
+if language == 'Python':
+    print('Conditional was True') 
 
-# add new key value
-student['phone'] = '555-5555'
-print(student.get('phone', 'Not found')) # 555-5555
+# Comparisons:
+# Equal            ==
+# Not Equal        !=
+# Greater Than     >
+# Less Than        <
+# Greater or Equal >=
+# Less or Equal    <=
+# Object Identity  is
 
-# add and edit multiple values in the dictionary using update method
-student.update({'name': 'Mosh', 'age': 26, 'phone': '123456'})
-print(student) # {1: 'index', 'name': 'Mosh', 'age': 26, 'courses': ['Math', 'CompSci'], 'phone': '123456'}
+# show if/else conditional check  
+language = 'Java'
+if language == 'Python':
+    print('Language is Python')
+else:
+    print('No match')
 
-# delete key and value using del method
-del student[1]
-print(student)
+# show multiple if/else/elseif conditional check  
+language = 'Java'
+if language == 'Python':
+    print('Language is Python')
+elif language == 'Java':
+    print('Language is Java')
+elif language == 'JavaScript':
+    print('Language is JavaScript')
+else:
+    print('No match')
 
-# delete key value using pop method
-age = student.pop('age')
-print(age) # 26
-print(student) # {'name': 'Mosh', 'age': 26, 'courses': ['Math', 'CompSci'], 'phone': '123456'}
+# Boolean operations
+# and
+# or
+# not
 
-# loop key-value in the dictionary
-student = {'name': 'Jhone', 'age': 25, 'courses':['Math', 'CompSci']}
+user = 'Admin'
+logged_in = False
 
-print(len(student)) # 3 get size of dictionary
-print(student.keys()) # dict_keys(['name', 'age', 'courses'])
-print(student.values()) # ict_values(['Jhone', 25, ['Math', 'CompSci']])
-# show keys and values 
-print(student.items()) # dict_items([('name', 'Jhone'), ('age', 25), ('courses', ['Math', 'CompSci'])])
+if not logged_in:
+    print('please logged in')
+elif logged_in and user == 'Admin':
+    print('Admin page')
+elif logged_in and (user != 'Admin'):
+    print('User page')
+else:
+    print('Welcome page')
 
-# loop keys
-for key in student:
-    print(key) #  'name', 'age', 'courses'
+# show different between "==" and "is"
 
-# loop values and kyes 
-for key, value in student.items():
-    print(key, value) name Jhone, age 25, courses ['Math', 'CompSci']
+a = [1,2,3]
+b = [1,2,3]
+c = a
+
+print(a == b) # true
+print(a is b) # false  because these are two different objects in memory
+
+# show with memory id
+print(id(a))
+print(id(b))
+print(id(a) == id(b)) # False
+print(id(a) == id(c)) # True bacause of referance 
+
+
+# Flase Values:
+  # False
+  # None
+  # Zero of any numeric type
+  # Any empty sequence. For exmaple, '', (), []
+  # Any empty mapping(dictionary). For exmaple, {}
+
+condition = False # None, 0, '', (), [], {}
+if condition:
+    print('Evaluated to True')
+else:
+    print('Evaluated to False')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ```
