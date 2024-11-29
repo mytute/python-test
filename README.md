@@ -1,86 +1,48 @@
-# Conditionals and Boolean - If, Else, and Elif Statements 
-
-Note: python does not have switch statements.   
+# Loops and Iterations - For/While Loops  
 
 ```python 
-# show hardcoded if condition with 'True' and 'False'
-if True:
-    print('Conditional was True')
+nums = [1, 2, 3, 4, 5]
 
-language = 'Python'
-if language == 'Python':
-    print('Conditional was True') 
+# "break" statement break out of the loop
 
-# Comparisons:
-# Equal            ==
-# Not Equal        !=
-# Greater Than     >
-# Less Than        <
-# Greater or Equal >=
-# Less or Equal    <=
-# Object Identity  is
+for num in nums:
+    if num == 3:
+        print('Found!')
+        break
+    print(num)
+# result:  1 2 Found!
 
-# show if/else conditional check  
-language = 'Java'
-if language == 'Python':
-    print('Language is Python')
-else:
-    print('No match')
+# "continue" statement skip the next iteration.  
 
-# show multiple if/else/elseif conditional check  
-language = 'Java'
-if language == 'Python':
-    print('Language is Python')
-elif language == 'Java':
-    print('Language is Java')
-elif language == 'JavaScript':
-    print('Language is JavaScript')
-else:
-    print('No match')
-
-# Boolean operations
-# and
-# or
-# not
-
-user = 'Admin'
-logged_in = False
-
-if not logged_in:
-    print('please logged in')
-elif logged_in and user == 'Admin':
-    print('Admin page')
-elif logged_in and (user != 'Admin'):
-    print('User page')
-else:
-    print('Welcome page')
-
-# show different between "==" and "is"
-
-a = [1,2,3]
-b = [1,2,3]
-c = a
-
-print(a == b) # true
-print(a is b) # false  because these are two different objects in memory
-
-# show with memory id
-print(id(a))
-print(id(b))
-print(id(a) == id(b)) # False
-print(id(a) == id(c)) # True bacause of referance 
+for num in nums:
+    if num == 3:
+        print('Found!')
+        continue
+    print(num)
+# result:  1 2 Found! 4 5
 
 
-# Flase Values:
-  # False
-  # None
-  # Zero of any numeric type
-  # Any empty sequence. For exmaple, '', (), []
-  # Any empty mapping(dictionary). For exmaple, {}
+# loop with in the loop
+for num in nums:
+    for letter in 'abc':
+        print(num, letter)
 
-condition = False # None, 0, '', (), [], {}
-if condition:
-    print('Evaluated to True')
-else:
-    print('Evaluated to False')
+# range keyword in loop
+for i in range(10): # default range for 10 is 0 to 9
+    print(i) 
+# result:  0 1 2 3 4 5 6 7 8 9
+
+for i in range(1,10): # set start value of range as 1
+    print(i) 
+# result: 1 2 3 4 5 6 7 8 9
+
+
+# "while" loop just keep going until certain condition is met or until we hit break
+x = 0
+while True:
+    if x == 5:
+        break
+    print(x)
+    x += 1
+# result 0 1 2 3 4
 ```
