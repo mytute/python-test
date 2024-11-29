@@ -1,44 +1,41 @@
-nums = [1, 2, 3, 4, 5]
+def hello_func():
+    pass
 
-# "break" statement break out of the loop
+hello_func() # call the function 
+print(hello_func) # <function hello_func at 0x7f2975b85c60>
+print(hello_func()) # None :because not returning any thing with the function.
 
-for num in nums:
-    if num == 3:
-        print('Found!')
-        break
-    print(num)
-# result:  1 2 Found!
+# return value from function
+def hello1():
+    return 'Hello Function'
+print(hello1().upper()) # HELLO FUNCTION 
 
-# "continue" statement skip the next iteration.  
+# passing argument and default parameter
+def hello2(greeting, name='You'):
+    return '{}, {}'.format(greeting, name)
+print(hello2('HI')) # HI, You
+print(hello2('HI', 'Corey')) # HI, Corey
+print(hello2('HI', name= 'Corey')) # HI, Corey
+# passing unorder argument to the function 
+print(hello2(name= 'Corey',greeting='HI')) # HI, Corey
 
-for num in nums:
-    if num == 3:
-        print('Found!')
-        continue
-    print(num)
-# result:  1 2 Found! 4 5
+# getting argument into one paramenter in the function.
+# args:positional argument, kwargs- keyword values 
+def student_info(*args, **kwargs):
+    print(args)   # ('Math', 'Art') Tuple
+    print(kwargs) # {'name': 'John', 'age': 22} Dictionary
+student_info('Math', 'Art', name='John', age=22)
 
+# spread argumemts and add as parameters 
+courses = ['Math', 'Art']
+info = {'name': 'John', 'age': 22}
+def student_details(*args, **kwargs):
+    print(args) 
+    print(kwargs)
+student_details(courses, info) # all set as positional arguments
+# result:(['Math', 'Art'], {'name': 'John', 'age': 22})
+# result:{}
+student_details(*courses, **info)
+# result:('Math', 'Art')
+# result:{'name': 'John', 'age': 22}
 
-# loop with in the loop
-for num in nums:
-    for letter in 'abc':
-        print(num, letter)
-
-# range keyword in loop
-for i in range(10): # default range for 10 is 0 to 9
-    print(i) 
-# result:  0 1 2 3 4 5 6 7 8 9
-
-for i in range(1,10): # set start value of range as 1
-    print(i) 
-# result: 1 2 3 4 5 6 7 8 9
-
-
-# "while" loop just keep going until certain condition is met or until we hit break
-x = 0
-while True:
-    if x == 5:
-        break
-    print(x)
-    x += 1
-# result 0 1 2 3 4

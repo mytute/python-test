@@ -1,48 +1,63 @@
-# Loops and Iterations - For/While Loops  
+# Functions  
 
-```python 
-nums = [1, 2, 3, 4, 5]
+functions are basically some instructions packaged together that perform a specific tasks.  
+it's not okey to write a function without block of it. but we can use "pass" key word.    
 
-# "break" statement break out of the loop
+functions allow us to reuse code without repeating code. 
 
-for num in nums:
-    if num == 3:
-        print('Found!')
-        break
-    print(num)
-# result:  1 2 Found!
+```python
+def hello_func():
+    pass
 
-# "continue" statement skip the next iteration.  
-
-for num in nums:
-    if num == 3:
-        print('Found!')
-        continue
-    print(num)
-# result:  1 2 Found! 4 5
-
-
-# loop with in the loop
-for num in nums:
-    for letter in 'abc':
-        print(num, letter)
-
-# range keyword in loop
-for i in range(10): # default range for 10 is 0 to 9
-    print(i) 
-# result:  0 1 2 3 4 5 6 7 8 9
-
-for i in range(1,10): # set start value of range as 1
-    print(i) 
-# result: 1 2 3 4 5 6 7 8 9
-
-
-# "while" loop just keep going until certain condition is met or until we hit break
-x = 0
-while True:
-    if x == 5:
-        break
-    print(x)
-    x += 1
-# result 0 1 2 3 4
+hello_func() # call the function 
+print(hello_func) # <function hello_func at 0x7f2975b85c60>
+print(hello_func()) # None :because not returning any thing with the function.
 ```
+
+return value from function  
+```python
+def hello():
+    return 'Hello Function'
+print(hello().upper()) # HELLO FUNCTION 
+```
+
+
+passing argument and default parameter
+```python 
+def hello2(greeting, name='You'):
+    return '{}, {}'.format(greeting, name)
+print(hello2('HI')) # HI, You
+print(hello2('HI', 'Corey')) # HI, Corey
+print(hello2('HI', name= 'Corey')) # HI, Corey
+# passing unorder argument to the function 
+print(hello2(name= 'Corey',greeting='HI')) # HI, Corey
+```
+
+
+getting argument into one paramenter in the function.  
+args:positional argument, kwargs- keyword values  
+```python 
+def student_info(*args, **kwargs):
+    print(args)   # ('Math', 'Art') Tuple
+    print(kwargs) # {'name': 'John', 'age': 22} Dictionary
+student_info('Math', 'Art', name='John', age=22)
+```
+
+
+spread argumemts and add as parameters   
+```python 
+courses = ['Math', 'Art']
+info = {'name': 'John', 'age': 22}
+def student_details(*args, **kwargs):
+    print(args) 
+    print(kwargs)
+student_details(courses, info) # all set as positional arguments
+# result:(['Math', 'Art'], {'name': 'John', 'age': 22})
+# result:{}
+student_details(*courses, **info)
+# result:('Math', 'Art')
+# result:{'name': 'John', 'age': 22}
+```
+
+
+
