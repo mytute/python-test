@@ -31,7 +31,7 @@ except Exception:
 ```
 
 
-we cant print Exception instead of custom error message  
+we can print Exception instead of custom error message  
 ```python 
 try:
     f = open('textfile.txt') # error 1
