@@ -1,63 +1,76 @@
-# Functions  
+# Importing Modules and Exporting The Standard Library    
 
-functions are basically some instructions packaged together that perform a specific tasks.  
-it's not okey to write a function without block of it. but we can use "pass" key word.    
-
-functions allow us to reuse code without repeating code. 
-
+create file call "my_module.py"  
+>my_module.py  
 ```python
-def hello_func():
-    pass
+print('Imported my_module...')
 
-hello_func() # call the function 
-print(hello_func) # <function hello_func at 0x7f2975b85c60>
-print(hello_func()) # None :because not returning any thing with the function.
+test = 'Testing String'
+
+def find_index(to_search, target):
+    '''Find the index of a value in a sequence'''
+    for i, value in enumerate(to_search):
+        if value == target:
+            return i
+    return -1
 ```
 
-return value from function  
-```python
-def hello():
-    return 'Hello Function'
-print(hello().upper()) # HELLO FUNCTION 
-```
-
-
-passing argument and default parameter
+import above "my_module.py" file in the "intro.py" file as module.  
+>intro.py  
 ```python 
-def hello2(greeting, name='You'):
-    return '{}, {}'.format(greeting, name)
-print(hello2('HI')) # HI, You
-print(hello2('HI', 'Corey')) # HI, Corey
-print(hello2('HI', name= 'Corey')) # HI, Corey
-# passing unorder argument to the function 
-print(hello2(name= 'Corey',greeting='HI')) # HI, Corey
+# basic way to import module 
+import my_module
+
+# import with alias
+import my_module as mm
+
+# import with direct multiple items 
+from my_module import find_index, test as t
+
+# import everything
+from my_module import *
+
+courses = ['History', 'Math', 'Physics', 'CompSci']
+
+index = my_module.find_index(courses, 'Math')
+print(index) # result:1
+index = mm.find_index(courses, 'Math')
+print(index) # result:1
+index = find_index(courses, 'Math')
+print(index) # result:1
 ```
 
-
-getting argument into one paramenter in the function.  
-args:positional argument, kwargs- keyword values  
+use of random module   
 ```python 
-def student_info(*args, **kwargs):
-    print(args)   # ('Math', 'Art') Tuple
-    print(kwargs) # {'name': 'John', 'age': 22} Dictionary
-student_info('Math', 'Art', name='John', age=22)
+import random
+courses = ['History', 'Math', 'Physics', 'CompSci']
+random_course1 = random.choice(courses)
+random_course2 = random.choice(courses)
+print(random_course1)
+print(random_course2)
 ```
 
-
-spread argumemts and add as parameters   
+use of math module  
 ```python 
-courses = ['Math', 'Art']
-info = {'name': 'John', 'age': 22}
-def student_details(*args, **kwargs):
-    print(args) 
-    print(kwargs)
-student_details(courses, info) # all set as positional arguments
-# result:(['Math', 'Art'], {'name': 'John', 'age': 22})
-# result:{}
-student_details(*courses, **info)
-# result:('Math', 'Art')
-# result:{'name': 'John', 'age': 22}
+import math
+rads = math.radians(90) # 90 degree convert to radian
+print(rads)
+print(math.sin(rads)) # result:1
 ```
 
+use of datetime module  
+```python 
+import datetime
+import calendar
+today = datetime.date.today() # get today date
+print(today)
+print(calendar.isleap(2020)) # result:True check is leap year
+```
 
-
+use of os module  
+```python 
+import os
+import calendar
+print(os.getcwd()) # get current path
+print(os.__file__) # see location of any module file
+```

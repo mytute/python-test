@@ -1,41 +1,47 @@
-def hello_func():
-    pass
+# basic way to import module 
+import my_module
 
-hello_func() # call the function 
-print(hello_func) # <function hello_func at 0x7f2975b85c60>
-print(hello_func()) # None :because not returning any thing with the function.
+# import with alias
+import my_module as mm
 
-# return value from function
-def hello1():
-    return 'Hello Function'
-print(hello1().upper()) # HELLO FUNCTION 
+# import with direct multiple items 
+from my_module import find_index, test as t
 
-# passing argument and default parameter
-def hello2(greeting, name='You'):
-    return '{}, {}'.format(greeting, name)
-print(hello2('HI')) # HI, You
-print(hello2('HI', 'Corey')) # HI, Corey
-print(hello2('HI', name= 'Corey')) # HI, Corey
-# passing unorder argument to the function 
-print(hello2(name= 'Corey',greeting='HI')) # HI, Corey
+# import everything
+from my_module import *
 
-# getting argument into one paramenter in the function.
-# args:positional argument, kwargs- keyword values 
-def student_info(*args, **kwargs):
-    print(args)   # ('Math', 'Art') Tuple
-    print(kwargs) # {'name': 'John', 'age': 22} Dictionary
-student_info('Math', 'Art', name='John', age=22)
+courses = ['History', 'Math', 'Physics', 'CompSci']
 
-# spread argumemts and add as parameters 
-courses = ['Math', 'Art']
-info = {'name': 'John', 'age': 22}
-def student_details(*args, **kwargs):
-    print(args) 
-    print(kwargs)
-student_details(courses, info) # all set as positional arguments
-# result:(['Math', 'Art'], {'name': 'John', 'age': 22})
-# result:{}
-student_details(*courses, **info)
-# result:('Math', 'Art')
-# result:{'name': 'John', 'age': 22}
+index = my_module.find_index(courses, 'Math')
+print(index) # result:1
+index = mm.find_index(courses, 'Math')
+print(index) # result:1
+index = find_index(courses, 'Math')
+print(index) # result:1
 
+# use of random module 
+import random
+courses = ['History', 'Math', 'Physics', 'CompSci']
+random_course1 = random.choice(courses)
+random_course2 = random.choice(courses)
+print(random_course1)
+print(random_course2)
+
+# use of math module  
+import math
+rads = math.radians(90) # 90 degree convert to radian
+print(rads)
+print(math.sin(rads)) # result:1
+
+# use of datetime module  
+import datetime
+import calendar
+today = datetime.date.today() # get today date
+print(today)
+print(calendar.isleap(2020)) # result:True check is leap year
+
+# use of os module  
+import os
+import calendar
+print(os.getcwd()) # get current path
+print(os.__file__) # see location of any module file
