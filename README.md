@@ -1,90 +1,52 @@
-# Using Try/Except Blocks for Error Handling  
-
-why we need try and except block ? 
+# 11 Generators  
 
 
-if you write try to open file which does not exist it will break your code.  
+1. convert following function in to generator function that function return result for each call.  
 ```python 
-f = open(textfile.txt)
+def square_numbers(nums):
+    result = [] 
+    for i in nums:
+        result.append(i*i)
+    return result 
+
+my_nums = square_numbers([1,2,3,4,5]) 
+print(my_nums) # [1, 4, 9, 16, 25] 
 ```
 
-
-if you wrap the above line with try/except the it will not break the code and just show error message.  
+converted function   
 ```python 
-try:
-    f = open('textfile.txt')
-except Exception:
-    print('Error happend!')
+def square_numbers_gen(nums):
+    for i in nums:
+        yield(i*i)
+
+my_nums = square_numbers_gen([1,2,3,4,5]) 
+print(my_nums) # <generator object square_numbers_gen at 0x7fa93a7eaa80> 
+
+# generators don't hold the entire result in memory, it yield one result at a time 
+print(next(my_nums))    # result: 1 
+print(next(my_nums))    # result: 4
+print(next(my_nums))    # result: 9
+print(next(my_nums))    # result: 16
+print(next(my_nums))    # result: 25
+# print(next(my_nums)) error 
+
+# print generator value using for loop   
+my_nums_for = square_numbers_gen([1,2,3,4,5]) 
+for num in my_nums_for:
+    print(num)
 ```
 
+2. convert above square function in to list comprehension and after convert it in to generator.     
+```python
+my_nums = [x*x for x in [1,2,3,4,5]]
+print(my_nums)
+# convert above list comprehension in to generator  
+my_nums_list = (x*x for x in [1,2,3,4,5])
+for num in my_nums_list:
+    print(num)
 
-"Exception" is catch all error. But we can specify the error   
-using "FileNotFoundError" only catch if file not found. so catch other error we can put "Exception" too.  
-```python 
-try:
-    f = open('textfile.txt') # error 1
-    #var = bad_var          # error 2
-except FileNotFoundError:
-    print('Sorry, This file does not exist!')
-except Exception:
-    print('Something went wrong')
+# show how to printout all of the values of the generator   
+my_nums_list = (x*x for x in [1,2,3,4,5])
+print(list(my_nums_list)) # [1, 4, 9, 16, 25]
 ```
 
-
-we can print Exception instead of custom error message  
-```python 
-try:
-    f = open('textfile.txt') # error 1
-    var = bad_var          # error 2
-except FileNotFoundError as e:
-    print(e)
-except Exception as e:
-    print(e)
-```
-
-
-instead read file inside try block, we can read it inside "else" block too.
-```python 
-try:
-    f = open('text_file.txt') # correct file name
-except FileNotFoundError as e:
-    print(e)
-except Exception as e:
-    print(e)
-else:
-    print(f.read())
-    f.close()
-```
-
-
-"finally" block execute always whether is there exception or not 
-```python 
-try:
-    f = open('text_file.txt') # correct file name
-except FileNotFoundError as e:
-    print(e)
-except Exception as e:
-    print(e)
-else:
-    print(f.read())
-    f.close()
-finally:
-    print("Executing Finally...")
-```
-
-
-make custom exceptions
-```python 
-try:
-    f = open('text_file.txt') # correct file name
-    raise Exception('test error..')
-except FileNotFoundError as e:
-    print(e)
-except Exception as e:
-    print(e)
-else:
-    print(f.read())
-    f.close()
-finally:
-    print("Executing Finally...")
-```
