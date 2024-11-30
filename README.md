@@ -1,76 +1,90 @@
-# Importing Modules and Exporting The Standard Library    
+# Using Try/Except Blocks for Error Handling  
 
-create file call "my_module.py"  
->my_module.py  
-```python
-print('Imported my_module...')
+why we need try and except block ? 
 
-test = 'Testing String'
 
-def find_index(to_search, target):
-    '''Find the index of a value in a sequence'''
-    for i, value in enumerate(to_search):
-        if value == target:
-            return i
-    return -1
+if you write try to open file which does not exist it will break your code.  
+```python 
+f = open(textfile.txt)
 ```
 
-import above "my_module.py" file in the "intro.py" file as module.  
->intro.py  
+
+if you wrap the above line with try/except the it will not break the code and just show error message.  
 ```python 
-# basic way to import module 
-import my_module
-
-# import with alias
-import my_module as mm
-
-# import with direct multiple items 
-from my_module import find_index, test as t
-
-# import everything
-from my_module import *
-
-courses = ['History', 'Math', 'Physics', 'CompSci']
-
-index = my_module.find_index(courses, 'Math')
-print(index) # result:1
-index = mm.find_index(courses, 'Math')
-print(index) # result:1
-index = find_index(courses, 'Math')
-print(index) # result:1
+try:
+    f = open('textfile.txt')
+except Exception:
+    print('Error happend!')
 ```
 
-use of random module   
+
+"Exception" is catch all error. But we can specify the error   
+using "FileNotFoundError" only catch if file not found. so catch other error we can put "Exception" too.  
 ```python 
-import random
-courses = ['History', 'Math', 'Physics', 'CompSci']
-random_course1 = random.choice(courses)
-random_course2 = random.choice(courses)
-print(random_course1)
-print(random_course2)
+try:
+    f = open('textfile.txt') # error 1
+    #var = bad_var          # error 2
+except FileNotFoundError:
+    print('Sorry, This file does not exist!')
+except Exception:
+    print('Something went wrong')
 ```
 
-use of math module  
+
+we cant print Exception instead of custom error message  
 ```python 
-import math
-rads = math.radians(90) # 90 degree convert to radian
-print(rads)
-print(math.sin(rads)) # result:1
+try:
+    f = open('textfile.txt') # error 1
+    var = bad_var          # error 2
+except FileNotFoundError as e:
+    print(e)
+except Exception as e:
+    print(e)
 ```
 
-use of datetime module  
+
+instead read file inside try block, we can read it inside "else" block too.
 ```python 
-import datetime
-import calendar
-today = datetime.date.today() # get today date
-print(today)
-print(calendar.isleap(2020)) # result:True check is leap year
+try:
+    f = open('text_file.txt') # correct file name
+except FileNotFoundError as e:
+    print(e)
+except Exception as e:
+    print(e)
+else:
+    print(f.read())
+    f.close()
 ```
 
-use of os module  
+
+"finally" block execute always whether is there exception or not 
 ```python 
-import os
-import calendar
-print(os.getcwd()) # get current path
-print(os.__file__) # see location of any module file
+try:
+    f = open('text_file.txt') # correct file name
+except FileNotFoundError as e:
+    print(e)
+except Exception as e:
+    print(e)
+else:
+    print(f.read())
+    f.close()
+finally:
+    print("Executing Finally...")
+```
+
+
+make custom exceptions
+```python 
+try:
+    f = open('text_file.txt') # correct file name
+    raise Exception('test error..')
+except FileNotFoundError as e:
+    print(e)
+except Exception as e:
+    print(e)
+else:
+    print(f.read())
+    f.close()
+finally:
+    print("Executing Finally...")
 ```

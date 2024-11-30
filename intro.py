@@ -1,47 +1,72 @@
-# basic way to import module 
-import my_module
 
-# import with alias
-import my_module as mm
+# if you write try to open file which does not exist it will break your code.
+#f = open(textfile.txt)
 
-# import with direct multiple items 
-from my_module import find_index, test as t
+# if you wrap the above line with try/except the it will not break the code and just show error message.
+try:
+    f = open('textfile.txt')
+except Exception:
+    print('Error happend!')
+    
+# "Exception" is catch all error. But we can specify the error
+# using "FileNotFoundError" only catch if file not found. so catch other error we can put "Exception" too. put 
+try:
+    f = open('textfile.txt') # error 1
+    #var = bad_var          # error 2
+except FileNotFoundError:
+    print('Sorry, This file does not exist!')
+except Exception:
+    print('Something went wrong')
 
-# import everything
-from my_module import *
+# we cant print Exception instead of custom error message
+try:
+    f = open('textfile.txt') # error 1
+    var = bad_var          # error 2
+except FileNotFoundError as e:
+    print(e)
+except Exception as e:
+    print(e)
 
-courses = ['History', 'Math', 'Physics', 'CompSci']
+# instead read file inside try block, we can read it inside "else" block too.
+try:
+    f = open('text_file.txt') # correct file name
+except FileNotFoundError as e:
+    print(e)
+except Exception as e:
+    print(e)
+else:
+    print(f.read())
+    f.close()
 
-index = my_module.find_index(courses, 'Math')
-print(index) # result:1
-index = mm.find_index(courses, 'Math')
-print(index) # result:1
-index = find_index(courses, 'Math')
-print(index) # result:1
+#  "finally" block execute always whether is there exception or not 
+try:
+    f = open('text_file.txt') # correct file name
+except FileNotFoundError as e:
+    print(e)
+except Exception as e:
+    print(e)
+else:
+    print(f.read())
+    f.close()
+finally:
+    print("Executing Finally...")
 
-# use of random module 
-import random
-courses = ['History', 'Math', 'Physics', 'CompSci']
-random_course1 = random.choice(courses)
-random_course2 = random.choice(courses)
-print(random_course1)
-print(random_course2)
 
-# use of math module  
-import math
-rads = math.radians(90) # 90 degree convert to radian
-print(rads)
-print(math.sin(rads)) # result:1
+# make custom exceptions
+try:
+    f = open('text_file.txt') # correct file name
+    raise Exception('test error..')
+except FileNotFoundError as e:
+    print(e)
+except Exception as e:
+    print(e)
+else:
+    print(f.read())
+    f.close()
+finally:
+    print("Executing Finally...")
 
-# use of datetime module  
-import datetime
-import calendar
-today = datetime.date.today() # get today date
-print(today)
-print(calendar.isleap(2020)) # result:True check is leap year
 
-# use of os module  
-import os
-import calendar
-print(os.getcwd()) # get current path
-print(os.__file__) # see location of any module file
+
+
+
