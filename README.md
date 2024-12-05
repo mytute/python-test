@@ -1,4 +1,3 @@
-#  15 Class Variables  
- 
+#  16 Class Methods and Static Methods 
 
 
