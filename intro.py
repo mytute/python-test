@@ -1,52 +1,60 @@
-# Classes and Instances  
+# Class Variables  
 
-# why we are use classes  
-# They allow us to logicallu group our variables and functions way that easy to reuse also easy to build upon it need be.  
-# method : function that assosiate with class.  
+# class variables works like 'static' keyword in java  
 
-# show instance variable contain data that unique to each intance  
+class Employee: 
+    raise_amount = 1.04  # class variable 
+    num_of_emps = 0 # class variable that increment for each instance created  
 
-class Employee:
-    pass 
-
-emp_1 = Employee()
-emp_2 = Employee()
-
-print(emp_1) # <__main__.Employee object at 0x7fb0b4133380>
-print(emp_2) # <__main__.Employee object at 0x7fb0b37e4b90> 
-
-emp_1.first = 'Corey'
-emp_1.last = 'Schafer'
-emp_1.email = 'samadhivkcom@gmail.com'
-emp_1.pay = 50000
-
-emp_2.first = 'Test'
-emp_2.last = 'User'
-emp_2.email = 'test.user@gmail.com'
-emp_2.pay = 60000
-
-print(emp_1.email)
-print(emp_2.email)
-
-# input employee details when initialize the class and add method for printing full name of employee.     
-class Employee2:
     def __init__(self, first, last, pay):
-        self.first = first 
+        self.first = first
         self.last = last
         self.pay = pay
         self.email = first + '.' + last + '@company.com'
 
+        Employee.num_of_emps += 1
+
     def fullname(self):
         return '{} {}'.format(self.first, self.last)
 
+    def apply_raise(self):
+        self.pay = int(self.pay * self.raise_amount)
+        # another way to access class variables 
+        # self.pay = int(self.pay * Employee.raise_amount)
+        # if you use Employee then surely it same for all instance
 
-emp_1 = Employee2('Corey', 'Schafer', 50000)
-emp_2 = Employee2('Test', 'User', 60000)
+emp_1 = Employee('Corey', 'Schafer', 5000)
+emp_2 = Employee('Test', 'User', 6000)
 
-print(emp_1.first)
-print(emp_2.first)
-print(emp_1.fullname())
+print(emp_1.pay)
+emp_1.apply_raise()
+print(emp_1.pay)
 
-# show another way to call "fullname" function.  
-print(Employee2.fullname(emp_1))
- 
+# show raise_amount value of class and each instance
+
+print(Employee.raise_amount) # result: 1.04
+print(emp_1.raise_amount) # result: 1.04
+print(emp_2.raise_amount) # result: 1.04
+
+# show attributes of instance and class for find where class variable is located   
+# print namespaces for instance and class  
+print(emp_1.__dict__) # not contain 'raise_amount' 
+print(emp_2.__dict__) # not contain 'raise_amount'
+print(Employee.__dict__) # contain 'raise_amount'
+        
+# change the raise_amount value in the class from outside and show all instance change value it self  
+Employee.raise_amount = 1.05
+print(Employee.raise_amount) # result: 1.05
+print(emp_1.raise_amount) # result: 1.05
+print(emp_2.raise_amount) # result: 1.05
+
+# insert raise_amount value in to instance and show after that instance use only it's value.  
+# first program look 'raise_amount' inside instance if there not contain the see the class   
+emp_1.raise_amount = 1.06
+print(Employee.raise_amount) # result: 1.05 
+print(emp_1.raise_amount) # result: 1.06
+print(emp_2.raise_amount) # result: 1.05
+
+# check increment count of instance  
+print(Employee.num_of_emps) # result: 2
+

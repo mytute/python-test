@@ -1,5 +1,4 @@
-# 12 Decorators - Dynamically Alter The Functionality Of Your Functions    
-
+#  15 Class Variables  
  
 
 
