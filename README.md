@@ -1,2 +1,4 @@
-#  18 Special (Magic/Dunder) Methods  
+#  19 Property Decorators - Getters, Setters, and Deleters     
+
+
 
