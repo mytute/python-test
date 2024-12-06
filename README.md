@@ -1,3 +1,2 @@
-#  16 Class Methods and Static Methods 
-
+#  17 Inheritance - Creating Subclasses
 

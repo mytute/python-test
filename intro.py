@@ -1,10 +1,10 @@
-# classmethod and staticmethod    
+#  17 Inheritance - Creating Subclasses
 
-# regular methods in a class automatically take the instance (self) as the first argument, but in the class methods it take class as first argument.   
+# inheritance allow us to inherit attribute and methods from a parent class.  
 
 class Employee: 
-    raise_amount = 1.04
-    num_of_emps = 0 
+    raise_amount = 1.04  # class variable 
+    num_of_emps = 0 # class variable that increment for each instance created  
 
     def __init__(self, first, last, pay):
         self.first = first
@@ -14,72 +14,89 @@ class Employee:
 
         Employee.num_of_emps += 1
 
-    # regular method 
     def fullname(self):
         return '{} {}'.format(self.first, self.last)
 
     def apply_raise(self):
         self.pay = int(self.pay * self.raise_amount)
 
-    # class method  
-    # in class method first argument is class. 
-    @classmethod
-    def set_raise_amt(cls, amount):
-       cls.raise_amount = amount 
+class Developer(Employee):
+    pass
 
-    # using classmethod we can return new instance within class  
-    @classmethod 
-    def from_string(cls, emp_str):
-        first, last, pay = emp_str.split('-')
-        return cls(first, last, pay)
+dev_1 = Developer('Corey', 'Schafer', 5000)
+dev_2 = Developer('Test', 'User', 6000)
 
-    # static method  
-    @staticmethod 
-    def is_workday(day):
-        if day.weekday() == 5 or day.weekday() == 6 :
-            return False
-        return True
+print(dev_1.email)
+print(dev_2.email)
+
+# show how to find method "resolution order"    
+# there are the places that python serarches attributes methods  
+print(help(Developer)) # result: Developer > Employee > builtins.object
 
 
+# in above example when init the "Developer" class it automatically call the it parent "Employee" class and it "init" method. let's see what we can do when we want to add some values to child "Developer" class when we init the "Developer" class.  
 
-emp_1 = Employee('Corey', 'Schafer', 5000)
-emp_2 = Employee('Test', 'User', 6000)
+class Developer2(Employee):
+    raise_amt = 1.10 # this not effect to parent class  
 
-# let's see easy way to input employee details  
-emp_str_1 = 'John-Doe-70000'
-emp_str_2 = 'Steve-Smith-30000'
-emp_str_3 = 'Jane-Doe-90000'
+    def __init__(self, first, last, pay, prog_lang):
+        super().__init__(first, last, pay)
+        # following method also same for above "super" method  
+        # but following method usually use for when we have multiple inheritance
+        # Employee.__init__(self, first, last, pay)
 
-first, last, pay = emp_str_1.split('-')
-new_emp_1 = Employee(first, last, pay)
-
-# using class method do Employee.raise_amount = amount  in differant way   
-Employee.set_raise_amt(1.05)
-
-print(Employee.raise_amount) # result: 1.05
-print(emp_1.raise_amount) # result: 1.05
-print(emp_2.raise_amount) # result: 1.05
+        self.prog_lang = prog_lang 
 
 
-# show we can call class methods using instance and do same thing  
+dev_1 = Developer2('Corey', 'Schafer', 5000, 'Python')
+dev_2 = Developer2('Test', 'User', 6000, 'Java')
 
-emp_1.set_raise_amt(1.06)
+print(dev_1.email)
+print(dev_1.prog_lang)
 
-print(Employee.raise_amount) # result: 1.06
-print(emp_1.raise_amount) # result: 1.06
-print(emp_2.raise_amount) # result: 1.06
+# let's see another exmaple of inheritance of "Employee"  
 
-# show using classmethod we can create new instance and return inside class  
-new_emp_2 = Employee.from_string(emp_str_2)
-print(new_emp_2.email)
-print(new_emp_2.pay)
+class Manager(Employee):
+
+    def __init__(self, first, last, pay, employees=None):
+        super().__init__(first, last, pay)
+
+        if employees is None:
+            self.employees = []
+        else: 
+            self.employees = employees
+
+    def add_emp(self, emp):
+        if emp not in self.employees:
+            self.employees.append(emp)
+
+    def remove_emp(self, emp):
+        if emp in self.employees:
+            self.employees.remove(emp)
+
+    def print_emps(self):
+        for emp in self.employees:
+            print('-->', emp.fullname())
 
 
-# static method don't pass anything to the method automatically 
-# you should write regularmethod or classmethod only that method has connection with class variables.  
-# if you don't access instance or the class anywhere with in the method 
+dev_1 = Developer2('Corey', 'Schafer', 5000, 'Python')
+dev_2 = Developer2('Test', 'User', 6000, 'Java')
 
-import datetime 
-my_date = datetime.date(2016, 7, 10)
-print(Employee.is_workday(my_date)) # result: False  
+mgr_1 = Manager('Sue', 'Smith', 9000, [dev_1]) # create manager instance with developer instance as employees  
 
+print(mgr_1.email)
+mgr_1.add_emp(dev_2)
+mgr_1.remove_emp(dev_1)
+
+mgr_1.print_emps()
+
+
+# python has these two built in functions called "isinstance" and "issubclass"   
+print(isinstance(mgr_1, Manager)) # True
+print(isinstance(mgr_1, Employee)) # True
+print(isinstance(mgr_1, Developer2)) # False
+
+
+print(issubclass(Manager, Employee)) # True
+print(issubclass(Developer2, Employee)) # True
+print(issubclass(Manager, Developer2)) # False
