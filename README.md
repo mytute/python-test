@@ -1,2 +1,2 @@
-#  17 Inheritance - Creating Subclasses
+#  18 Special (Magic/Dunder) Methods  
 
